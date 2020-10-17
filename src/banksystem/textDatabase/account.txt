@@ -1,0 +1,5 @@
+Savings [100000;Sat Oct 17 14:11:27 IST 2020;nency;10000.0;5.0;10000.0]
+Savings [100001;Sat Oct 17 14:13:12 IST 2020;nency;10000.0;5.0;10000.0]
+Current [100002;Sat Oct 17 14:13:38 IST 2020;archit;600.0;600.0]
+Fixeddeposit [100003;Sat Oct 17 14:13:42 IST 2020;Nency;6000.0;15.0;5.0;6000.0]
+Joint [100004;Sat Oct 17 14:36:41 IST 2020;rohil;1000.0;prafulbhai;father;1200.0]

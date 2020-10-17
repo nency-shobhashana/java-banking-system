@@ -1,22 +1,25 @@
 package banksystem.transaction;
 
+import banksystem.account.Account;
+import banksystem.account.Fixeddeposit;
+
 public abstract class BaseTransaction {
 	private static long lastTranID = 0;
 	protected long tranID = 0;
     protected double amount;
     protected String tranDetail;
-    protected long accountId;
+    protected long accountNo;
     protected String date;
     
     public abstract long doTransaction();
     
     // constructor
-	public BaseTransaction(double amount, String tranDetail, long accountId, String date) {
+	public BaseTransaction(double amount, String tranDetail, long accountNo, String date) {
 		super();
 		this.tranID = generateTransactionId();
 		this.amount = amount;
 		this.tranDetail = tranDetail;
-		this.accountId = accountId;
+		this.accountNo = accountNo;
 		this.date = date;
 	}
 	
@@ -52,10 +55,10 @@ public abstract class BaseTransaction {
 	}
 	
 	public long getAccountId() {
-		return accountId;
+		return accountNo;
 	}
 	public void setAccountId(long accountId) {
-		this.accountId = accountId;
+		this.accountNo = accountId;
 	}
 
 	@Override
@@ -63,9 +66,12 @@ public abstract class BaseTransaction {
 		return "transcation [tranID=" + tranID + ", Amount=" + amount + ", tranDetail=" + tranDetail + "]";
 	}
 	
-	protected boolean isAccountIdValid() {
-		
-		return true;
+	protected boolean isAccountValid(Account account) {
+		return account != null && !(account instanceof Fixeddeposit);
+	}
+	
+	protected Account getAccount() {
+		return TransactionRepo.getAccount(accountNo); 
 	}
 	
 	

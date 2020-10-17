@@ -1,14 +1,15 @@
 package banksystem.transaction.payment;
 
+import banksystem.account.Account;
 import banksystem.transaction.TransactionRepo;
 
 public class MobilePayment extends BillPayment {
 	
 	private Long mobileNo;
 
-	public MobilePayment(double amount, String tranDetail, long accountId, String date, String type,
+	public MobilePayment(double amount, String tranDetail, long accountNo, String date, String type,
 			String provider, String consumerNo, Long mobileNo) {
-		super(amount, tranDetail, accountId, date, type, provider, consumerNo);
+		super(amount, tranDetail, accountNo, date, type, provider, consumerNo);
 		this.mobileNo = mobileNo;
 	}
 
@@ -22,13 +23,27 @@ public class MobilePayment extends BillPayment {
 
 	@Override
 	public long doTransaction() {
-		return TransactionRepo.mobilePaymentTransaction(this);
+		Account account = getAccount();
+		if (isAccountValid(account)) {
+			double remainBalance = account.getBalance() - amount;
+			if (remainBalance > 0) {
+				account.setBalance(account.getBalance() - amount);
+				TransactionRepo.updateAccount(account);
+				return TransactionRepo.mobilePaymentTransaction(this);
+			} else {
+				System.out.println("Not sufficent balance in account; Your account balance is "+ account.getBalance());
+				return -1;
+			}
+		} else {
+			System.out.println("Account no is invalid or does not exist");
+			return -1;
+		}
 	}
 	
 	@Override
 	public String toString() {
 		return "MobilePayment [" + getType() + ";" + getProvider() + ";" + mobileNo + ";" + tranID + ";" + amount + ";"
-				+ tranDetail + ";" + accountId + ";" + date + "]";
+				+ tranDetail + ";" + accountNo + ";" + date + "]";
 	}
 
 	public static MobilePayment parseMobilePayment(String str) throws Exception {

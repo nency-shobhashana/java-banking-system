@@ -1,5 +1,6 @@
 package banksystem.transaction.payment;
 
+import banksystem.account.Account;
 import banksystem.transaction.BaseTransaction;
 import banksystem.transaction.TransactionRepo;
 
@@ -9,9 +10,9 @@ public class BillPayment extends BaseTransaction {
 	private String provider;
 	private String consumerNo;
 
-	public BillPayment(double amount, String tranDetail, long accountId, String date, String type,
+	public BillPayment(double amount, String tranDetail, long accountNo, String date, String type,
 			String provider, String consumerNo) {
-		super(amount, tranDetail, accountId, date);
+		super(amount, tranDetail, accountNo, date);
 		this.type = type;
 		this.provider = provider;
 		this.consumerNo = consumerNo;
@@ -40,13 +41,27 @@ public class BillPayment extends BaseTransaction {
 
 	@Override
 	public long doTransaction() {
-		return TransactionRepo.billPaymentTransaction(this);
+		Account account = getAccount();
+		if (isAccountValid(account)) {
+			double remainBalance = account.getBalance() - amount;
+			if (remainBalance > 0) {
+				account.setBalance(account.getBalance() - amount);
+				TransactionRepo.updateAccount(account);
+				return TransactionRepo.billPaymentTransaction(this);
+			} else {
+				System.out.println("Not sufficent balance in account; Your account balance is "+ account.getBalance());
+				return -1;
+			}
+		} else {
+			System.out.println("Account no is invalid or does not exist");
+			return -1;
+		}
 	}
 
 	@Override
 	public String toString() {
 		return "BillPayment [" + type + ";" + provider + ";" + consumerNo + ";" 
-				+ tranID + ";" + amount + ";" + tranDetail + ";" + accountId + ";"
+				+ tranID + ";" + amount + ";" + tranDetail + ";" + accountNo + ";"
 				+ date + "]";
 	}
 

@@ -1,13 +1,15 @@
 package banksystem.transaction;
 
+import banksystem.account.Account;
+
 public class Deposit extends BaseTransaction {
 	
 	private String personName;
 	private String type;
 	
-	public Deposit(double amount, String tranDetail, long accountId, String date, String personName,
+	public Deposit(double amount, String tranDetail, long accountNo, String date, String personName,
 			String type) {
-		super(amount, tranDetail, accountId, date);
+		super(amount, tranDetail, accountNo, date);
 		this.personName = personName;
 		this.type = type;
 	}
@@ -28,12 +30,20 @@ public class Deposit extends BaseTransaction {
 
 	@Override
 	public long doTransaction() {
-		return TransactionRepo.depositTransaction(this);
+		Account account = getAccount();
+		if(isAccountValid(account)) {
+			account.setBalance(account.getBalance() + amount);
+			TransactionRepo.updateAccount(account);
+			return TransactionRepo.depositTransaction(this);
+		} else {
+			System.out.println("Account no is invalid or does not exist");
+			return -1;
+		}
 	}
 	
 	@Override
 	public String toString() {
-		return "Deposit [" + personName + ";" + type + ";" + tranID + ";" + amount + ";" + tranDetail + ";" + accountId + ";" + date + "]";
+		return "Deposit [" + personName + ";" + type + ";" + tranID + ";" + amount + ";" + tranDetail + ";" + accountNo + ";" + date + "]";
 	}
 
 	public static Deposit parseDeposit(String str) throws Exception {
