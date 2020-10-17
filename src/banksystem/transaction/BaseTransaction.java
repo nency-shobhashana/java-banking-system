@@ -1,7 +1,8 @@
 package banksystem.transaction;
 
 public abstract class BaseTransaction {
-	protected long tranID = 1000;
+	private static long lastTranID = 0;
+	protected long tranID = 0;
     protected double amount;
     protected String tranDetail;
     protected long accountId;
@@ -12,11 +13,23 @@ public abstract class BaseTransaction {
     // constructor
 	public BaseTransaction(double amount, String tranDetail, long accountId, String date) {
 		super();
-		this.tranID = 0;
+		this.tranID = generateTransactionId();
 		this.amount = amount;
 		this.tranDetail = tranDetail;
 		this.accountId = accountId;
 		this.date = date;
+	}
+	
+	private long generateTransactionId() {
+		if(lastTranID == 0){
+			long transactionIdFromfile = TransactionRepo.getLastTransId();
+			if(transactionIdFromfile == 0) {
+				lastTranID = 100000000;
+			} else {
+				lastTranID = transactionIdFromfile;
+			}
+		}
+		return lastTranID++;
 	}
 
 	// getter and setter

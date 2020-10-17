@@ -5,16 +5,16 @@ import java.util.*;
 
 
 import banksystem.transaction.payment.BillPayment;
-import banksystem.transaction.payment.MobileRecharge;
+import banksystem.transaction.payment.MobilePayment;
 
-public class Transaction {
+public class TransactionPanel {
 
 	public Scanner sc = new Scanner(System.in);
-	public Transaction() {
+	public TransactionPanel() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void doTraction() {
+	public void doTraction() throws Exception {
 		
 		System.out.println();
 		System.out.println("Transaction Panel");
@@ -26,6 +26,7 @@ public class Transaction {
 			System.out.println("2. Withdraw money");
 			System.out.println("3. Transfer money");
 			System.out.println("4. Pay utility bills");
+			System.out.println("5. Show Transactions");
 			System.out.println("0. Go back");
 			int type = sc.nextInt();
 			switch (type) {
@@ -43,6 +44,9 @@ public class Transaction {
 			case 4:
 				payBillTransaction();
 				break;
+			case 5:
+				showTransaction();
+				break;
 			default:
 				System.out.println("Please choose valid option");
 				break;
@@ -59,6 +63,7 @@ public class Transaction {
 		accountId=sc.nextLong();
         System.out.println("Enter the amount: ");
         amount=sc.nextDouble();
+        sc.nextLine();
         System.out.println("Enter the transaction Detail: ");
         tranDetail=sc.nextLine();
         System.out.println("Enter the person name: ");
@@ -78,13 +83,14 @@ public class Transaction {
 	}
 
 	private void withdrawTransaction() {
-		String tranDetail = "Withdraw money by customer";
+		String tranDetail = "Withdraw money";
 		String date, checkNo;
 		double amount;
 		long accountId;
 		
 		System.out.println("Enter the accountId: ");
 		accountId=sc.nextLong();
+		sc.nextLine();
         System.out.println("Enter the check number: ");
         checkNo=sc.nextLine();
         System.out.println("Enter the amount: ");
@@ -113,6 +119,7 @@ public class Transaction {
         destinationAccountId=sc.nextLong();
         System.out.println("Enter the amount: ");
         amount=sc.nextDouble();
+        sc.nextLine();
         System.out.println("Enter the transaction Detail: ");
         tranDetail=sc.nextLine();
         date = new Date().toString();
@@ -152,7 +159,7 @@ public class Transaction {
 				dth();
 				break;
 			case 4:
-				mobileRecharge();
+				mobileBillPayment();
 				break;
 			default:
 				System.out.println("Please choose valid option");
@@ -171,6 +178,7 @@ public class Transaction {
 		
 		System.out.println("Enter the accountId: ");
 		accountId=sc.nextLong();
+		sc.nextLine();
         System.out.println("Enter the provider name: ");
         provider=sc.nextLine();
         System.out.println("Enter the consumer number: ");
@@ -179,7 +187,7 @@ public class Transaction {
         amount=sc.nextDouble();
         date = new Date().toString();
         
-        BillPayment billPayment=new BillPayment(amount, tranDetail, accountId, date, provider, consumerNo, type);
+        BillPayment billPayment=new BillPayment(amount, tranDetail, accountId, date, type, provider, consumerNo);
         long transactionId = billPayment.doTransaction();
         
         if(transactionId > 0) {
@@ -198,6 +206,7 @@ public class Transaction {
 		
 		System.out.println("Enter the accountId: ");
 		accountId=sc.nextLong();
+		sc.nextLine();
         System.out.println("Enter the provider name: ");
         provider=sc.nextLine();
         System.out.println("Enter the consumer number: ");
@@ -206,7 +215,7 @@ public class Transaction {
         amount=sc.nextDouble();
         date = new Date().toString();
         
-        BillPayment billPayment=new BillPayment(amount, tranDetail, accountId, date, provider, consumerNo, type);
+        BillPayment billPayment=new BillPayment(amount, tranDetail, accountId, date, type, provider, consumerNo);
         long transactionId = billPayment.doTransaction();
         
         if(transactionId > 0) {
@@ -225,6 +234,7 @@ public class Transaction {
 		
 		System.out.println("Enter the accountId: ");
 		accountId=sc.nextLong();
+		sc.nextLine();
         System.out.println("Enter the provider name: ");
         provider=sc.nextLine();
         System.out.println("Enter the consumer number: ");
@@ -233,7 +243,7 @@ public class Transaction {
         amount=sc.nextDouble();
         date = new Date().toString();
         
-        BillPayment billPayment=new BillPayment(amount, tranDetail, accountId, date, provider, consumerNo, type);
+        BillPayment billPayment=new BillPayment(amount, tranDetail, accountId, date, type, provider, consumerNo);
         long transactionId = billPayment.doTransaction();
         
         if(transactionId > 0) {
@@ -243,7 +253,7 @@ public class Transaction {
         }
 	}
 	
-	private void mobileRecharge() {
+	private void mobileBillPayment() {
 		String type = "Mobile";
 		String consumerNo = "";
 		String tranDetail = "Mobile Recharge done";
@@ -255,14 +265,15 @@ public class Transaction {
 		accountId=sc.nextLong();
         System.out.println("Enter the mobile number to recharge: ");
         mobileNo=sc.nextLong();
+        sc.nextLine();
         System.out.println("Enter the provider name: ");
         provider=sc.nextLine();
         System.out.println("Enter the amount: ");
         amount=sc.nextDouble();
         date = new Date().toString();
         
-        MobileRecharge mobileRecharge=new MobileRecharge(amount, tranDetail, accountId, date, provider, consumerNo, type, mobileNo);
-        long transactionId = mobileRecharge.doTransaction();
+        MobilePayment mobilePayment=new MobilePayment(amount, tranDetail, accountId, date, type, provider, consumerNo, mobileNo);
+        long transactionId = mobilePayment.doTransaction();
         
         if(transactionId > 0) {
         	System.out.println("Transaction done successfully. Transaction Id: " + transactionId);
@@ -271,4 +282,40 @@ public class Transaction {
         }
 	}
 
+	private void showTransaction() throws Exception {
+		System.out.println("Choose from below to see different transaction option:");
+		System.out.println("1. Last 10 transaction of selcted account");
+		System.out.println("2. Last 10 transaction of Deposite");
+		System.out.println("3. Last 10 transaction of Withdraw");
+		System.out.println("4. Last 10 transaction of Transfer money from one to other account");
+		System.out.println("5. Last 10 transaction of utility bill payment");
+		System.out.println("6. Last 10 mobile bill payment payment");
+		System.out.println("0. Go back");
+		int type = sc.nextInt();
+		switch (type) {
+		case 0:
+			return;
+		case 1:
+			TransactionRepo.getLastTenTransaction(0);
+			break;
+		case 2:
+			TransactionRepo.getLastTenDepositTransaction();
+			break;
+		case 3:
+			TransactionRepo.getAllWithdrawTransaction();
+			break;
+		case 4:
+			TransactionRepo.getAllTransferTransaction();
+			break;
+		case 5:
+			TransactionRepo.getAllBillPaymentTransaction();
+			break;
+		case 6:
+			TransactionRepo.getAllMobilePaymentTransaction();
+			break;
+		default:
+			System.out.println("Please choose valid option");
+			break;
+		}
+	}
 }

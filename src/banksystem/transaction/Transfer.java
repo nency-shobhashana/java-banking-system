@@ -19,8 +19,26 @@ public class Transfer extends BaseTransaction {
 
 	@Override
 	public long doTransaction() {
-		// TODO Auto-generated method stub
-		return 0;
+		return TransactionRepo.transferTransaction(this);
+	}
+
+	@Override
+	public String toString() {
+		return "Transfer [" + destinationAccountId + ";" + tranID + ";" + amount
+				+ ";" + tranDetail + ";" + accountId + ";" + date + "]";
+	}
+
+	public static Transfer parseTransfer(String str) throws Exception {
+		str = str.replace("Transfer"
+				+ " [", "").replace("]", "");
+		String[] fields = str.split(";");
+		if(fields.length > 0) {
+			Transfer transfer = new Transfer(Double.parseDouble(fields[2]), fields[3], Long.parseLong(fields[4]), fields[5], Long.parseLong(fields[0]));
+			transfer.tranID = Long.parseLong(fields[1]);
+			return transfer;
+		}else {
+			throw new Exception("");
+		}
 	}
 	
 }

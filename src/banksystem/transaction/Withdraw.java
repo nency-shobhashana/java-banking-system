@@ -19,8 +19,25 @@ public class Withdraw extends BaseTransaction {
 
 	@Override
 	public long doTransaction() {
-		// TODO Auto-generated method stub
-		return 0;
+		return TransactionRepo.withdrawTransaction(this);
+	}
+	
+	@Override
+	public String toString() {
+		return "Withdraw [" + checkNo + ";" + tranID + ";" + amount + ";"
+				+ tranDetail + ";" + accountId + ";" + date + "]";
+	}
+
+	public static Withdraw parseWithdraw(String str) throws Exception {
+		str = str.replace("Withdraw [", "").replace("]", "");
+		String[] fields = str.split(";");
+		if(fields.length > 0) {
+			Withdraw withdraw = new Withdraw(Double.parseDouble(fields[2]), fields[3], Long.parseLong(fields[4]), fields[5], fields[0]);
+			withdraw.tranID = Long.parseLong(fields[1]);
+			return withdraw;
+		} else {
+			throw new Exception("");
+		}
 	}
 
 	
