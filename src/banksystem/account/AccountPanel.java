@@ -9,7 +9,7 @@ import banksystem.transaction.TransactionRepo;
 
 public class AccountPanel {
 	public static Scanner sc = new Scanner(System.in);
-	public static String accountFileName = AccountPanel.class.getResource("../textDatabase/account.txt").getPath();
+	public static String accountFileName = "./src/banksystem/textDatabase/account.txt";
 	// accountPanel main method
 	public void main() throws IOException {
 
@@ -19,11 +19,11 @@ public class AccountPanel {
 
 		while (true) {
 			System.out.println("Choose from below option:");
-			System.out.println("1. savings account");
-			System.out.println("2. current account");
-			System.out.println("3. fixed deposit account");
-			System.out.println("4. joint account");
-			System.out.println(" press  0  number to exit");
+			System.out.println("1. Savings account");
+			System.out.println("2. Current account");
+			System.out.println("3. Fixed deposit account");
+			System.out.println("4. Joint account");
+			System.out.println(" Press  0  number to exit");
 			int type = sc.nextInt();
 			sc.nextLine();
 			switch (type) {
@@ -66,7 +66,7 @@ public class AccountPanel {
 			printWriter.println(savingsAccount.toString());
 			System.out.println("Account Id is:" +savingsAccount.getAccountNo());
 
-			System.out.println("press 0 to stop or any number to add more");
+			System.out.println("Press 0 to stop or any number to add more");
 			if (sc.nextInt() == 0)
 				break;
 			sc.nextLine();
@@ -89,7 +89,7 @@ public class AccountPanel {
 			Current currentAccount = new Current(createdDate, customerNo, openingBalance);
 			printWriter.println(currentAccount.toString());
 			System.out.println("Account Id is:" +currentAccount.getAccountNo());
-			System.out.println("press 0 to stop or any number to add more");
+			System.out.println("Press 0 to stop or any number to add more");
 			if (sc.nextInt() == 0)
 				break;
 			sc.nextLine();
@@ -119,7 +119,7 @@ public class AccountPanel {
 					timePeriod);
 			printWriter.println(fixeddepositAccount.toString());
 			System.out.println("Account Id is:" +fixeddepositAccount.getAccountNo());
-			System.out.println("press 0 to stop or any number to add more");
+			System.out.println("Press 0 to stop or any number to add more");
 			if (sc.nextInt() == 0)
 				break;
 			sc.nextLine();
@@ -138,7 +138,7 @@ public class AccountPanel {
 			String createdDate = new Date().toString();
 			System.out.println("Enter the Customer no: ");
 			String customerNo = sc.nextLine();
-			System.out.println("enter opening balance:");
+			System.out.println("Enter opening balance:");
 			openingBalance = sc.nextDouble();
 			sc.nextLine();
 			System.out.println("Enter the name of joint account holder");
@@ -149,7 +149,7 @@ public class AccountPanel {
 					holderRelationship);
 			System.out.println("Account Id is:" +jointAccount.getAccountNo());
 			printWriter.println(jointAccount.toString());
-			System.out.println("press 0 to stop or any number to add more");
+			System.out.println("Press 0 to stop or any number to add more");
 			if (sc.nextInt() == 0)
 				break;
 			sc.nextLine();

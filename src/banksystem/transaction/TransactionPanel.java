@@ -295,11 +295,11 @@ public class TransactionPanel {
 		System.out.println();
 		System.out.println("Choose from below to see different transaction option:");
 		System.out.println("1. Last 10 transaction of selcted account");
-		System.out.println("2. Last 10 transaction of Deposite");
+		System.out.println("2. Last 10 transaction of Deposit");
 		System.out.println("3. Last 10 transaction of Withdraw");
 		System.out.println("4. Last 10 transaction of Transfer money from one to other account");
-		System.out.println("5. Last 10 transaction of utility bill payment");
-		System.out.println("6. Last 10 mobile bill payment payment");
+		System.out.println("5. Last 10 transaction of Utility bill payment");
+		System.out.println("6. Last 10 Mobile bill payment");
 		System.out.println("0. Go back");
 		int type = sc.nextInt();
 		ArrayList<? extends BaseTransaction> list = null;

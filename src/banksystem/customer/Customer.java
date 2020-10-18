@@ -11,7 +11,7 @@ import banksystem.transaction.Withdraw;
 
 public class Customer {
 	
-	public static String customerFileName = Customer.class.getResource("../textDatabase/customer.txt").getPath();
+	public static String customerFileName = "./src/banksystem/textDatabase/customer.txt";
 	
 	private static long lastCustomerNo = 0;
 	protected long customerNo = 0;

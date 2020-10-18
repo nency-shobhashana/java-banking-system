@@ -18,7 +18,7 @@ import java.nio.file.Files;
 
 public class CustomerPanel {
 
-	public static String customerFileName = CustomerPanel.class.getResource("../textDatabase/customer.txt").getPath();
+	public static String customerFileName = "./src/banksystem/textDatabase/customer.txt";
 	public static Scanner sc = new Scanner(System.in);
 
 	// customerPanel main method

@@ -21,7 +21,7 @@ public class bankingSystem {
 		while (true) {
 			System.out.println("Choose from below for banking:");
 			System.out.println("1. Create Customer");
-			System.out.println("2. Create Acoount");
+			System.out.println("2. Create Account");
 			System.out.println("3. Do Transactions");
 			System.out.println("0. Exit");
 			int type = sc.nextInt();
