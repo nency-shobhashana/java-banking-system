@@ -14,8 +14,17 @@ public class Fixeddeposit extends Account {
 		this.interestRate = interestRate;
 		this.timePeriod = timePeriod;
 	}
+	
+	public Fixeddeposit(long accountNo,String createdDate, String customerName, double depositAmount, double interestRate,
+			double timePeriod) {
+		super(accountNo, createdDate, customerName);
+		this.depositAmount = depositAmount;
+		this.balance = depositAmount;
+		this.interestRate = interestRate;
+		this.timePeriod = timePeriod;
+	}
 
-//getters and setters
+	//getters and setters
 
 	public double getDepositAmount() {
 		return depositAmount;
@@ -46,14 +55,14 @@ public class Fixeddeposit extends Account {
 		return "Fixeddeposit [" + accountNo + ";" + createdDate + ";" + customerName + ";" + depositAmount + ";"
 				+ interestRate + ";" + timePeriod + ";" + balance + "]";
 	}
-
+	
+	// convert string to Fixed Deposit account class
 	public static Fixeddeposit parseFixeddeposit(String str) throws Exception {
 		str = str.replace("Fixeddeposit [", "").replace("]", "");
 		String[] fields = str.split(";");
 		if (fields.length > 0) {
-			Fixeddeposit fixeddeposit = new Fixeddeposit(fields[1], fields[2], Double.parseDouble(fields[3]),
+			Fixeddeposit fixeddeposit = new Fixeddeposit(Long.parseLong(fields[0]), fields[1], fields[2], Double.parseDouble(fields[3]),
 					Double.parseDouble(fields[4]), Double.parseDouble(fields[5]));
-			fixeddeposit.accountNo = Long.parseLong(fields[0]);
 			fixeddeposit.balance = Double.parseDouble(fields[6]);
 			return fixeddeposit;
 		} else {

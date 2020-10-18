@@ -4,15 +4,22 @@ public class Savings extends Account {
 	private double openingBalance;
 	private double annualInterest;
 
-//constructor
+	// constructor
 	public Savings(String createdDate, String customerName, double openingBalance, double annualInterest) {
 		super(createdDate, customerName);
 		this.openingBalance = openingBalance;
 		this.balance = openingBalance;
 		this.annualInterest = annualInterest;
 	}
+	
+	public Savings(long accountNo, String createdDate, String customerName, double openingBalance, double annualInterest) {
+		super(accountNo, createdDate, customerName);
+		this.openingBalance = openingBalance;
+		this.balance = openingBalance;
+		this.annualInterest = annualInterest;
+	}
 
-//getters and setters
+    // getters and setters
 	public double getOpeningBalance() {
 		return openingBalance;
 	}
@@ -35,13 +42,13 @@ public class Savings extends Account {
 				+ annualInterest + ";" + balance + "]";
 	}
 
+	// convert string to Saving account class
 	public static Savings parseSavings(String str) throws Exception {
 		str = str.replace("Savings [", "").replace("]", "");
 		String[] fields = str.split(";");
 		if (fields.length > 0) {
-			Savings savings = new Savings(fields[1], fields[2], Double.parseDouble(fields[3]),
+			Savings savings = new Savings(Long.parseLong(fields[0]), fields[1], fields[2], Double.parseDouble(fields[3]),
 					Double.parseDouble(fields[4]));
-			savings.accountNo = Long.parseLong(fields[0]);
 			savings.balance = Double.parseDouble(fields[5]);
 			return savings;
 		} else {

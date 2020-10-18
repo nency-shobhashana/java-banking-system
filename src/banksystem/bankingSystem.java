@@ -3,6 +3,7 @@ package banksystem;
 import java.util.Scanner;
 
 import banksystem.account.AccountPanel;
+import banksystem.customer.CustomerPanel;
 import banksystem.transaction.TransactionPanel;
 
 public class bankingSystem {
@@ -11,6 +12,7 @@ public class bankingSystem {
 	public static void main(String[] args) throws Exception {
 		TransactionPanel transactionPanel = new TransactionPanel();
 		AccountPanel accountPanel = new AccountPanel();
+		CustomerPanel customerPanel = new CustomerPanel();
 
 		System.out.println();
 		System.out.println("Welcome to Banking System");
@@ -27,12 +29,13 @@ public class bankingSystem {
 			case 0:
 				return;
 			case 1:
+				customerPanel.main();
 				break;
 			case 2:
 				accountPanel.main();
 				break;
 			case 3:
-				transactionPanel.doTraction();
+				transactionPanel.main();
 				break;
 			default:
 				System.out.println("Please choose valid option");

@@ -6,14 +6,14 @@ import banksystem.account.Fixeddeposit;
 public abstract class BaseTransaction {
 	private static long lastTranID = 0;
 	protected long tranID = 0;
-    protected double amount;
-    protected String tranDetail;
-    protected long accountNo;
-    protected String date;
-    
-    public abstract long doTransaction();
-    
-    // constructor
+	protected double amount;
+	protected String tranDetail;
+	protected long accountNo;
+	protected String date;
+
+	public abstract long doTransaction();
+
+	// constructor
 	public BaseTransaction(double amount, String tranDetail, long accountNo, String date) {
 		super();
 		this.tranID = generateTransactionId();
@@ -22,17 +22,28 @@ public abstract class BaseTransaction {
 		this.accountNo = accountNo;
 		this.date = date;
 	}
-	
-	private long generateTransactionId() {
-		if(lastTranID == 0){
+
+	// constructor for auto-generate
+	public BaseTransaction(long tranID, double amount, String tranDetail, long accountNo, String date) {
+		super();
+		this.tranID = tranID;
+		this.amount = amount;
+		this.tranDetail = tranDetail;
+		this.accountNo = accountNo;
+		this.date = date;
+	}
+
+	// method auto-generate Transaction ID
+	private static long generateTransactionId() {
+		if (lastTranID == 0) {
 			long transactionIdFromfile = TransactionRepo.getLastTransId();
-			if(transactionIdFromfile == 0) {
+			if (transactionIdFromfile == 0) {
 				lastTranID = 100000000;
 			} else {
 				lastTranID = transactionIdFromfile;
 			}
 		}
-		return lastTranID++;
+		return ++lastTranID;
 	}
 
 	// getter and setter
@@ -43,6 +54,7 @@ public abstract class BaseTransaction {
 	public double getAmount() {
 		return amount;
 	}
+
 	public void setTranAmount(double amount) {
 		this.amount = amount;
 	}
@@ -50,14 +62,16 @@ public abstract class BaseTransaction {
 	public String getTranDetail() {
 		return tranDetail;
 	}
+
 	public void setTranDetail(String tranDetail) {
 		this.tranDetail = tranDetail;
 	}
-	
-	public long getAccountId() {
+
+	public long getAccountNo() {
 		return accountNo;
 	}
-	public void setAccountId(long accountId) {
+
+	public void setAccountNo(long accountId) {
 		this.accountNo = accountId;
 	}
 
@@ -65,14 +79,15 @@ public abstract class BaseTransaction {
 	public String toString() {
 		return "transcation [tranID=" + tranID + ", Amount=" + amount + ", tranDetail=" + tranDetail + "]";
 	}
-	
+
+	// method of account is valid or not
 	protected boolean isAccountValid(Account account) {
 		return account != null && !(account instanceof Fixeddeposit);
 	}
-	
+
+	// method of get account
 	protected Account getAccount() {
-		return TransactionRepo.getAccount(accountNo); 
+		return TransactionRepo.getAccount(accountNo);
 	}
-	
-	
+
 }

@@ -1,0 +1,10 @@
+Nency,100000000,male,1231231230,asd@asd.com,18-06-1990,asd
+rohil,100000001,male,9874563210,rohil@gmail.com,06-05-2020,bhuj
+avyukt,100000002,male,9632145870,avyukt@gmail.com,9-05-2020,usa
+qwe,100000003,zxc,123123,qwe@qwe.cp,12-12,asd
+asd,100000004,xcv,234234,sdf@ert.com,23-2,dfg
+rty,100000005,vbn,46456,rty@fgh.com,4-4,fgh
+chhaganlal,100000006,dfg,345345,dfg@fg.vom,31-3,ert
+dobo,100000007,mal,234243,cvb@cvb.vom,2-3,dfg
+bijoDobo,100000008,ry,345345,dfg@hgf.vdf,1-1,fgh
+Shobhashana,100000009,Female,65478893021,kusum@gmail.com,12-12-2020,Bhuj

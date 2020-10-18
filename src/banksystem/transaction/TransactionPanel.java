@@ -1,6 +1,7 @@
 package banksystem.transaction;
 
 import java.util.Date;
+import java.util.stream.Collectors;
 import java.util.*;
 
 
@@ -14,7 +15,8 @@ public class TransactionPanel {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void doTraction() throws Exception {
+	// transactionPanel main method
+	public void main() throws Exception {
 		
 		System.out.println();
 		System.out.println("Transaction Panel");
@@ -54,6 +56,7 @@ public class TransactionPanel {
 		}
 	}
 
+	// method for deposit
 	private void depositTransaction() {
 		String tranDetail, date, personName, type;
 		double amount;
@@ -82,6 +85,7 @@ public class TransactionPanel {
         }
 	}
 
+	// method for withdraw
 	private void withdrawTransaction() {
 		String tranDetail = "Withdraw money";
 		String date, checkNo;
@@ -108,6 +112,7 @@ public class TransactionPanel {
 
 	}
 
+	// method for transfer transaction
 	private void transferTransaction() {
 		String date, tranDetail;
 		double amount;
@@ -132,9 +137,9 @@ public class TransactionPanel {
         } else {
         	System.out.println("Transaction failed.");
         }
-
 	}
 
+	// switch method for bill payments
 	private void payBillTransaction() {
 		System.out.println();
 
@@ -168,7 +173,7 @@ public class TransactionPanel {
 		}
 	}
 	
-	
+	// method for electric bill
 	private void hydro() {
 		String type = "Hydro";
 		String tranDetail = "Hydro bill paid";
@@ -197,6 +202,7 @@ public class TransactionPanel {
         }
 	}
 	
+	// method for water bill
 	private void water() {
 		String type = "Water";
 		String tranDetail = "Water bill paid";
@@ -225,6 +231,7 @@ public class TransactionPanel {
         }
 	}
 	
+	// method for dth bill
 	private void dth() {
 		String type = "DTH";
 		String tranDetail = "DTH bill paid";
@@ -253,6 +260,7 @@ public class TransactionPanel {
         }
 	}
 	
+	// method for mobile bill
 	private void mobileBillPayment() {
 		String type = "Mobile";
 		String consumerNo = "";
@@ -282,7 +290,9 @@ public class TransactionPanel {
         }
 	}
 
+	// show all transactions
 	private void showTransaction() throws Exception {
+		System.out.println();
 		System.out.println("Choose from below to see different transaction option:");
 		System.out.println("1. Last 10 transaction of selcted account");
 		System.out.println("2. Last 10 transaction of Deposite");
@@ -292,30 +302,43 @@ public class TransactionPanel {
 		System.out.println("6. Last 10 mobile bill payment payment");
 		System.out.println("0. Go back");
 		int type = sc.nextInt();
+		ArrayList<? extends BaseTransaction> list = null;
 		switch (type) {
 		case 0:
 			return;
 		case 1:
-			TransactionRepo.getLastTenTransaction(0);
+			System.out.println("Enter the accountId: ");
+			long accountId=sc.nextLong();
+			list = TransactionRepo.getLastTenTransaction(accountId);
 			break;
 		case 2:
-			TransactionRepo.getLastTenDepositTransaction();
+			list = TransactionRepo.getLastTenDepositTransaction();
 			break;
 		case 3:
-			TransactionRepo.getAllWithdrawTransaction();
+			list = TransactionRepo.getLastTenWithdrawTransaction();
 			break;
 		case 4:
-			TransactionRepo.getAllTransferTransaction();
+			list = TransactionRepo.getLastTenTransferTransaction();
 			break;
 		case 5:
-			TransactionRepo.getAllBillPaymentTransaction();
+			list = TransactionRepo.getLastTenBillPaymentTransaction();
 			break;
 		case 6:
-			TransactionRepo.getAllMobilePaymentTransaction();
+			list = TransactionRepo.getLastTenMobilePaymentTransaction();
 			break;
 		default:
 			System.out.println("Please choose valid option");
 			break;
+		}
+		if(list != null) {
+			if(list.size()>0) {
+				System.out.println("-------------------");
+				System.out.println("List of Transaction");
+				System.out.println(list.stream().map(Object::toString).collect(Collectors.joining("\n")));
+				System.out.println("-------------------");
+			} else {
+				System.out.println("No Transaction. \n");
+			}
 		}
 	}
 }

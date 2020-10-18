@@ -9,6 +9,7 @@ public class AccountPanel {
 	public static Scanner sc = new Scanner(System.in);
 	public static String accountFileName = "E:\\Lambton\\projects\\java-banking-system\\src\\banksystem\\textDatabase\\account.txt";
 
+	// accountPanel main method
 	public void main() throws IOException {
 
 		System.out.println();
@@ -67,6 +68,7 @@ public class AccountPanel {
 			System.out.println("press 0 to stop or any number to add more");
 			if (sc.nextInt() == 0)
 				break;
+			sc.nextLine();
 		}
 		printWriter.close();
 		fileWriter.close();
@@ -89,6 +91,7 @@ public class AccountPanel {
 			System.out.println("press 0 to stop or any number to add more");
 			if (sc.nextInt() == 0)
 				break;
+			sc.nextLine();
 		}
 		printWriter.close();
 		fileWriter.close();
@@ -118,6 +121,7 @@ public class AccountPanel {
 			System.out.println("press 0 to stop or any number to add more");
 			if (sc.nextInt() == 0)
 				break;
+			sc.nextLine();
 		}
 		printWriter.close();
 		fileWriter.close();
@@ -147,6 +151,7 @@ public class AccountPanel {
 			System.out.println("press 0 to stop or any number to add more");
 			if (sc.nextInt() == 0)
 				break;
+			sc.nextLine();
 		}
 		printWriter.close();
 		fileWriter.close();

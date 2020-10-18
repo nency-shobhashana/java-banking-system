@@ -5,19 +5,29 @@ import banksystem.transaction.BaseTransaction;
 import banksystem.transaction.TransactionRepo;
 
 public class BillPayment extends BaseTransaction {
-	
+
 	private String type;
 	private String provider;
 	private String consumerNo;
 
-	public BillPayment(double amount, String tranDetail, long accountNo, String date, String type,
-			String provider, String consumerNo) {
+	// constructor
+	public BillPayment(double amount, String tranDetail, long accountNo, String date, String type, String provider,
+			String consumerNo) {
 		super(amount, tranDetail, accountNo, date);
 		this.type = type;
 		this.provider = provider;
 		this.consumerNo = consumerNo;
 	}
-		
+
+	// constructor for auto-generate
+	public BillPayment(long tranId, double amount, String tranDetail, long accountNo, String date, String type,
+			String provider, String consumerNo) {
+		super(tranId, amount, tranDetail, accountNo, date);
+		this.type = type;
+		this.provider = provider;
+		this.consumerNo = consumerNo;
+	}
+
 	public String getType() {
 		return type;
 	}
@@ -39,6 +49,7 @@ public class BillPayment extends BaseTransaction {
 		this.consumerNo = consumerNo;
 	}
 
+	// method for calculate amount and save transaction
 	@Override
 	public long doTransaction() {
 		Account account = getAccount();
@@ -49,7 +60,7 @@ public class BillPayment extends BaseTransaction {
 				TransactionRepo.updateAccount(account);
 				return TransactionRepo.billPaymentTransaction(this);
 			} else {
-				System.out.println("Not sufficent balance in account; Your account balance is "+ account.getBalance());
+				System.out.println("Not sufficent balance in account; Your account balance is " + account.getBalance());
 				return -1;
 			}
 		} else {
@@ -60,24 +71,21 @@ public class BillPayment extends BaseTransaction {
 
 	@Override
 	public String toString() {
-		return "BillPayment [" + type + ";" + provider + ";" + consumerNo + ";" 
-				+ tranID + ";" + amount + ";" + tranDetail + ";" + accountNo + ";"
-				+ date + "]";
+		return "BillPayment [" + tranID + ";" + accountNo + ";" + amount + ";" + type + ";" + provider + ";"
+				+ consumerNo + ";" + tranDetail + ";" + date + "]";
 	}
 
-
+	// convert string to Utilizes Bill payment transaction class
 	public static BillPayment parseBillPayment(String str) throws Exception {
 		str = str.replace("BillPayment [", "").replace("]", "");
 		String[] fields = str.split(";");
-		if(fields.length > 0) {
-			BillPayment billPayment = new BillPayment(Double.parseDouble(fields[4]), fields[5], Long.parseLong(fields[6]), fields[7], fields[0], fields[1], fields[2]);
-			billPayment.tranID = Long.parseLong(fields[3]);
+		if (fields.length > 0) {
+			BillPayment billPayment = new BillPayment(Long.parseLong(fields[0]), Double.parseDouble(fields[2]),
+					fields[6], Long.parseLong(fields[1]), fields[7], fields[3], fields[4], fields[5]);
 			return billPayment;
 		} else {
 			throw new Exception("");
 		}
 	}
-
-
 
 }
