@@ -11,8 +11,8 @@ import banksystem.transaction.Withdraw;
 
 public class Customer {
 	
-	public static String customerFileName = "E:\\Lambton\\projects\\java-banking-system\\src\\banksystem\\textDatabase\\customer.txt";
-
+	public static String customerFileName = Customer.class.getResource("../textDatabase/customer.txt").getPath();
+	
 	private static long lastCustomerNo = 0;
 	protected long customerNo = 0;
 	private String name;

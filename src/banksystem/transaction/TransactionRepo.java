@@ -23,8 +23,8 @@ import banksystem.transaction.payment.BillPayment;
 import banksystem.transaction.payment.MobilePayment;
 
 public class TransactionRepo {
-	public static String fileName = "E:\\Lambton\\projects\\java-banking-system\\src\\banksystem\\textDatabase\\transaction.txt";
-	public static String accountFileName = "E:\\Lambton\\projects\\java-banking-system\\src\\banksystem\\textDatabase\\account.txt";
+	public static String fileName = TransactionRepo.class.getResource("../textDatabase/transaction.txt").getPath();
+	public static String accountFileName = TransactionRepo.class.getResource("../textDatabase/account.txt").getPath();
 
 	private static BufferedReader bufferedReader;
 	private static BufferedWriter bufferedWriter;

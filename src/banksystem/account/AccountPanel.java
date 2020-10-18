@@ -5,10 +5,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
+import banksystem.transaction.TransactionRepo;
+
 public class AccountPanel {
 	public static Scanner sc = new Scanner(System.in);
-	public static String accountFileName = "E:\\Lambton\\projects\\java-banking-system\\src\\banksystem\\textDatabase\\account.txt";
-
+	public static String accountFileName = AccountPanel.class.getResource("../textDatabase/account.txt").getPath();
 	// accountPanel main method
 	public void main() throws IOException {
 
@@ -55,13 +56,13 @@ public class AccountPanel {
 		while (true) {
 			double openingBalance, annualInterest;
 			String createdDate = new Date().toString();
-			System.out.println("Enter the Customer name: ");
-			String customerName = sc.nextLine();
+			System.out.println("Enter the Customer no: ");
+			String customerNo = sc.nextLine();
 			System.out.println("Enter  amount for opening account: ");
 			openingBalance = sc.nextDouble();
 			System.out.println("Enter annual interest: ");
 			annualInterest = sc.nextDouble();
-			Savings savingsAccount = new Savings(createdDate, customerName, openingBalance, annualInterest);
+			Savings savingsAccount = new Savings(createdDate, customerNo, openingBalance, annualInterest);
 			printWriter.println(savingsAccount.toString());
 			System.out.println("Account Id is:" +savingsAccount.getAccountNo());
 
@@ -80,12 +81,12 @@ public class AccountPanel {
 		PrintWriter printWriter = new PrintWriter(fileWriter);
 		while (true) {
 			double openingBalance;
-			System.out.println("Enter the Customer name: ");
-			String customerName = sc.nextLine();
+			System.out.println("Enter the Customer no: ");
+			String customerNo = sc.nextLine();
 			System.out.println("enter opening balance:");
 			openingBalance = sc.nextDouble();
 			String createdDate = new Date().toString();
-			Current currentAccount = new Current(createdDate, customerName, openingBalance);
+			Current currentAccount = new Current(createdDate, customerNo, openingBalance);
 			printWriter.println(currentAccount.toString());
 			System.out.println("Account Id is:" +currentAccount.getAccountNo());
 			System.out.println("press 0 to stop or any number to add more");
@@ -106,15 +107,15 @@ public class AccountPanel {
 			double interestRate;
 			double timePeriod;
 			String createdDate = new Date().toString();
-			System.out.println("Enter the Customer name: ");
-			String customerName = sc.nextLine();
+			System.out.println("Enter the Customer no: ");
+			String customerNo = sc.nextLine();
 			System.out.println("Enter the amount:");
 			noOfDeposit = sc.nextInt();
 			System.out.println("interest rate:");
 			interestRate = sc.nextDouble();
 			System.out.println("Enter Time period (in months): ");
 			timePeriod = sc.nextDouble();
-			Fixeddeposit fixeddepositAccount = new Fixeddeposit(createdDate, customerName, noOfDeposit, interestRate,
+			Fixeddeposit fixeddepositAccount = new Fixeddeposit(createdDate, customerNo, noOfDeposit, interestRate,
 					timePeriod);
 			printWriter.println(fixeddepositAccount.toString());
 			System.out.println("Account Id is:" +fixeddepositAccount.getAccountNo());
@@ -135,8 +136,8 @@ public class AccountPanel {
 			double openingBalance;
 			String jointHolderName, holderRelationship;
 			String createdDate = new Date().toString();
-			System.out.println("Enter the Customer name: ");
-			String customerName = sc.nextLine();
+			System.out.println("Enter the Customer no: ");
+			String customerNo = sc.nextLine();
 			System.out.println("enter opening balance:");
 			openingBalance = sc.nextDouble();
 			sc.nextLine();
@@ -144,7 +145,7 @@ public class AccountPanel {
 			jointHolderName = sc.nextLine();
 			System.out.println("Enter relationship with joint account holder");
 			holderRelationship = sc.nextLine();
-			Joint jointAccount = new Joint(createdDate, customerName, openingBalance, jointHolderName,
+			Joint jointAccount = new Joint(createdDate, customerNo, openingBalance, jointHolderName,
 					holderRelationship);
 			System.out.println("Account Id is:" +jointAccount.getAccountNo());
 			printWriter.println(jointAccount.toString());

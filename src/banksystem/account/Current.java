@@ -6,13 +6,13 @@ public class Current extends Account {
 	private double openingBalance;
 
 	// constructor
-	public Current(String createdDate, String customerName, double openingBalance) {
-		super(createdDate, customerName);
+	public Current(String createdDate, String customerNo, double openingBalance) {
+		super(createdDate, customerNo);
 		this.openingBalance = openingBalance;
 		this.balance = openingBalance;
 	}
-	public Current(long accountNo, String createdDate, String customerName, double openingBalance) {
-		super(accountNo, createdDate, customerName);
+	public Current(long accountNo, String createdDate, String customerNo, double openingBalance) {
+		super(accountNo, createdDate, customerNo);
 		this.openingBalance = openingBalance;
 		this.balance = openingBalance;
 	}
@@ -28,7 +28,7 @@ public class Current extends Account {
 
 	@Override
 	public String toString() {
-		return "Current [" + accountNo + ";" + createdDate + ";" + customerName + ";" + openingBalance + ";" + balance + "]";
+		return "Current [" + accountNo + ";" + createdDate + ";" + customerNo + ";" + openingBalance + ";" + balance + "]";
 	}
 	
 	// convert string to Current account class

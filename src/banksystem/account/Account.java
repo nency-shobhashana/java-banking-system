@@ -11,23 +11,23 @@ public abstract class Account {
 	private static long lastAccountNo = 0;
 	protected long accountNo = 0;
 	protected String createdDate;
-	protected String customerName;
+	protected String customerNo;
 	protected double balance;
 
 	// constructor
-	public Account(String createdDate, String customerName) {
+	public Account(String createdDate, String customerNo) {
 		super();
 		this.accountNo = generateAccountNo();
 		this.createdDate = createdDate;
-		this.customerName = customerName;
+		this.customerNo = customerNo;
 	}
 	
 	// constructor for auto-generate
-	public Account(long accountNo, String createdDate, String customerName) {
+	public Account(long accountNo, String createdDate, String customerNo) {
 		super();
 		this.accountNo = accountNo;
 		this.createdDate = createdDate;
-		this.customerName = customerName;
+		this.customerNo = customerNo;
 	}
 	
 	// method auto-generate accountNo
@@ -55,11 +55,11 @@ public abstract class Account {
 		this.createdDate = createdDate;
 	}
 
-	public String getCustomerName() {
-		return customerName;
+	public String getCustomerNo() {
+		return customerNo;
 	}
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
+	public void setCustomerNo(String customerNo) {
+		this.customerNo = customerNo;
 	}
 
 	public double getBalance() {

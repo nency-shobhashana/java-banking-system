@@ -5,15 +5,15 @@ public class Savings extends Account {
 	private double annualInterest;
 
 	// constructor
-	public Savings(String createdDate, String customerName, double openingBalance, double annualInterest) {
-		super(createdDate, customerName);
+	public Savings(String createdDate, String customerNo, double openingBalance, double annualInterest) {
+		super(createdDate, customerNo);
 		this.openingBalance = openingBalance;
 		this.balance = openingBalance;
 		this.annualInterest = annualInterest;
 	}
 	
-	public Savings(long accountNo, String createdDate, String customerName, double openingBalance, double annualInterest) {
-		super(accountNo, createdDate, customerName);
+	public Savings(long accountNo, String createdDate, String customerNo, double openingBalance, double annualInterest) {
+		super(accountNo, createdDate, customerNo);
 		this.openingBalance = openingBalance;
 		this.balance = openingBalance;
 		this.annualInterest = annualInterest;
@@ -38,7 +38,7 @@ public class Savings extends Account {
 
 	@Override
 	public String toString() {
-		return "Savings [" + accountNo + ";" + createdDate + ";" + customerName + ";" + openingBalance + ";"
+		return "Savings [" + accountNo + ";" + createdDate + ";" + customerNo + ";" + openingBalance + ";"
 				+ annualInterest + ";" + balance + "]";
 	}
 

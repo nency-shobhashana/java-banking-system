@@ -6,18 +6,18 @@ public class Joint extends Account {
 	private String holderRelationship;
 
 //constructor
-	public Joint(String createdDate, String customerName, double openingBalance, String jointHolderName,
+	public Joint(String createdDate, String customerNo, double openingBalance, String jointHolderName,
 			String holderRelationship) {
-		super(createdDate, customerName);
+		super(createdDate, customerNo);
 		this.openingBalance = openingBalance;
 		this.balance = openingBalance;
 		this.jointHolderName = jointHolderName;
 		this.holderRelationship = holderRelationship;
 	}
 	
-	public Joint(long accountNo, String createdDate, String customerName, double openingBalance, String jointHolderName,
+	public Joint(long accountNo, String createdDate, String customerNo, double openingBalance, String jointHolderName,
 			String holderRelationship) {
-		super(accountNo, createdDate, customerName);
+		super(accountNo, createdDate, customerNo);
 		this.openingBalance = openingBalance;
 		this.balance = openingBalance;
 		this.jointHolderName = jointHolderName;
@@ -51,7 +51,7 @@ public class Joint extends Account {
 
 	@Override
 	public String toString() {
-		return "Joint [" + accountNo + ";" + createdDate + ";" + customerName + ";" + openingBalance + ";"
+		return "Joint [" + accountNo + ";" + createdDate + ";" + customerNo + ";" + openingBalance + ";"
 				+ jointHolderName + ";" + holderRelationship + ";" + balance + "]";
 	}
 

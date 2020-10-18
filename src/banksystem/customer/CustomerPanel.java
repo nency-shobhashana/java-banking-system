@@ -1,6 +1,9 @@
 package banksystem.customer;
 
 import java.util.*;
+
+import banksystem.transaction.TransactionRepo;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,7 +18,7 @@ import java.nio.file.Files;
 
 public class CustomerPanel {
 
-	public static String customerFileName = "E:\\Lambton\\projects\\java-banking-system\\src\\banksystem\\textDatabase\\customer.txt";
+	public static String customerFileName = CustomerPanel.class.getResource("../textDatabase/customer.txt").getPath();
 	public static Scanner sc = new Scanner(System.in);
 
 	// customerPanel main method
@@ -79,6 +82,7 @@ public class CustomerPanel {
 			System.out.println("Choose from below options : \n1: Create Customer\n2: View/Update Customer Details \n0: for back");
 			System.out.println();
 			int type = sc.nextInt();
+			sc.nextLine();
 			if(type == 0) {
 				return;
 			}
@@ -135,6 +139,7 @@ public class CustomerPanel {
 					System.out.println(
 							"Choose from below options: \n1: Change name\n2: Change address\n3: Change Phone number\n4: Change email");
 					int select = sc.nextInt();
+					sc.nextLine();
 					switch (select) {
 					case 1:
 						System.out.println("Enter the old name: ");

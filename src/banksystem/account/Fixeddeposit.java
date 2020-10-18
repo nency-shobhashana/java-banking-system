@@ -6,18 +6,18 @@ public class Fixeddeposit extends Account {
 	private double timePeriod;
 
 //constructor
-	public Fixeddeposit(String createdDate, String customerName, double depositAmount, double interestRate,
+	public Fixeddeposit(String createdDate, String customerNo, double depositAmount, double interestRate,
 			double timePeriod) {
-		super(createdDate, customerName);
+		super(createdDate, customerNo);
 		this.depositAmount = depositAmount;
 		this.balance = depositAmount;
 		this.interestRate = interestRate;
 		this.timePeriod = timePeriod;
 	}
 	
-	public Fixeddeposit(long accountNo,String createdDate, String customerName, double depositAmount, double interestRate,
+	public Fixeddeposit(long accountNo,String createdDate, String customerNo, double depositAmount, double interestRate,
 			double timePeriod) {
-		super(accountNo, createdDate, customerName);
+		super(accountNo, createdDate, customerNo);
 		this.depositAmount = depositAmount;
 		this.balance = depositAmount;
 		this.interestRate = interestRate;
@@ -52,7 +52,7 @@ public class Fixeddeposit extends Account {
 
 	@Override
 	public String toString() {
-		return "Fixeddeposit [" + accountNo + ";" + createdDate + ";" + customerName + ";" + depositAmount + ";"
+		return "Fixeddeposit [" + accountNo + ";" + createdDate + ";" + customerNo + ";" + depositAmount + ";"
 				+ interestRate + ";" + timePeriod + ";" + balance + "]";
 	}
 	
