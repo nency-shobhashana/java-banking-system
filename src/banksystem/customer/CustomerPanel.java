@@ -100,7 +100,7 @@ public class CustomerPanel {
 				System.out.println("Enter the email: ");
 				String email = sc.nextLine();
 				Customer customer = new Customer(name, address, gender, phone, email, dob);
-				System.out.println("Customber No is:" +customer.getCustomerNo());
+				System.out.println("Customer No is:" +customer.getCustomerNo());
 
 				PrintWriter out = null;
 				FileWriter fstream = null;

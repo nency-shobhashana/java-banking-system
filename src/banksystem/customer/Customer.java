@@ -136,7 +136,7 @@ public class Customer {
 		return name + "," + customerNo + "," + gender + "," + phone + "," + email + "," + date + "," +  address+ "\n";
 	}
 	
-	// convert string to cutomer class
+	// convert string to customer class
 	private static Customer parseCustomer(String str) throws Exception {
 		String[] fields = str.split(",");
 		if (fields.length > 0) {
